@@ -1,6 +1,8 @@
 (ns tulip.core-test
   (:require [clojure.test :refer :all]
-            [tulip.core :refer :all]))
+            [tulip.core :refer :all])
+  (:use ring.mock.request 
+        tulip.routes))
 
 (deftest a-test
   (testing "Trivial test to accept travis build"
