@@ -1,4 +1,4 @@
-# :tulip: Tulip [![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)]() 
+# :tulip: Tulip [![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)]() [![Build Status](https://travis-ci.org/domobee/tulip.svg?branch=master)](https://travis-ci.org/domobee/tulip)
 Flexible API to receive information from hive instances.
 
 ## About
