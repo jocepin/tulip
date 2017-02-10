@@ -11,7 +11,7 @@
 (deftest test-app
   (testing "Testing users POST ROUTE"
     (let [response (app (request :post "/users"))]
-      (is (= (:status response) 200)))
+      (is (= (:status response) 200))))
     ;;  (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
   (testing "Testing 404 pages."
     (let [response (app (request :get "/bogus-route"))]
