@@ -2,7 +2,7 @@
 Flexible API to receive information from hive instances.
 
 ## About
-This APP plays an important role in the structure of our project,
+This API plays an important role in the structure of our project,
 it will recover the values of the different **instances** deployed on 
 each hive. These values are stored in MongoDB, a No-SQl database. 
 This API will use **json** formatting norm for easy retreating values in clojure.
