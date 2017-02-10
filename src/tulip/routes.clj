@@ -6,7 +6,7 @@
 
 (defroutes app-routes
   "API routes declared by compojure's macro"
-  (POST "/" request
+  (POST "/users" request
         (let [name (or (get-in request [:params :name])
                        (get-in request [:body :name])
                        "John Doe")]
