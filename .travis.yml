@@ -1,2 +1,2 @@
 language: clojure
-script: lein ring server
+script: lein uberjar
