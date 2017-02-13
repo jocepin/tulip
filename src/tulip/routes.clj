@@ -15,7 +15,7 @@
           {:status 200
            :body {:name name
                   :desc (str "The name you sent to me was " name)}}))
-  
+  (GET "/" [] res/api-infos)
   (route/resources "/")
   (route/not-found {:status 404
-                    :body {:errors "Not found"}}))
+                    :body{:error "Not found"}}))
