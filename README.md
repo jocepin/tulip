@@ -11,6 +11,10 @@ This API will use **json** formatting norm for easy retreating values in clojure
 ```bash
 lein ring server-headless
 ```
+## Testing code
+```bash
+lein test
+```
 ## License
 
 Copyright © 2017 Domobee

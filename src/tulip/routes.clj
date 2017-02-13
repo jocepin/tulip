@@ -8,13 +8,7 @@
 
 (defroutes app-routes
   "API routes declared by compojure's macro"
-  (POST "/users" request
-        (let [name (or (get-in request [:params :name])
-                       (get-in request [:body :name])
-                       "John Doe")]
-          {:status 200
-           :body {:name name
-                  :desc (str "The name you sent to me was " name)}}))
+  (POST "/testing" request (res/extract request))
   (GET "/" [] res/api-infos)
   (route/resources "/")
   (route/not-found {:status 404

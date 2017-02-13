@@ -19,3 +19,13 @@
                :license{:name "Eclipse Public License"
                         :url "http://www.apache.org/licenses/LICENSE-2.0.html"}
                :version (System/getProperty "tulip.version")}}})  
+
+(defn extract [request]
+  "Take in paramater full post parameters and extract thems
+   to parse users input"
+  (let [name (or (get-in request [:params :name])
+                 (get-in request [:body :name])
+                 "John Doe")]
+    {:status 200
+     :body {:name name
+            :desc (str"Your name is " name)}}))

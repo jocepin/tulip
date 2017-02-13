@@ -11,9 +11,8 @@
 (deftest test-api-status
   "Test API status from response"
   (testing "Testing users POST ROUTE"
-    (let [response (app (request :post "/users"))]
-      (is (= (:status response) 200))))
-   
+    (let [response (app (request :post "/testing"))]
+      (is (= (:status response) 200))))   
   (testing "Testing 404 pages."
     (let [response (app (request :get "/some-foo-routes"))]
       (is (= (:status response) 404)))))
@@ -23,3 +22,9 @@
   (testing "Testing content types"
     (let [response (app (request :get "/"))]
       (is (= (get-in response [:headers "Content-Type"]) "application/json; charset=utf-8")))))
+
+(deftest test-parse-parameters
+  "Testing the parsing method to extract client values"
+  (testing "Trying to extract user input from POST form"
+    (let [response (app (request :post "/testing?name=turkey"))]
+      (is (= (get-in response [:body :name] "turkey") "turkey")))))
