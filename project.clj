@@ -28,7 +28,7 @@
                                   [ring-mock "0.1.5"]]}}
   :bin {:name "tulip"}
   :plugins [[lein-ring "0.11.0"]]
-  :ring {:handler tulip.handler/app}
+  :ring {:handler tulip.app/app}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [ring/ring-core "1.6.0-beta7"]
                  [ring/ring-json "0.4.0"]
