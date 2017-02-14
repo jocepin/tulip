@@ -8,8 +8,9 @@
 
 (defroutes app-routes
   "API routes declared by compojure's macro"
-  (POST "/testing" request (res/extract request))
   (GET "/" [] res/api-infos)
+  (GET "/hive/:id/status" [id] (res/get-hive-status id))
+  (POST "/testing" request (res/extract request))
   (route/resources "/")
   (route/not-found {:status 404
                     :body{:error "Not found"}}))

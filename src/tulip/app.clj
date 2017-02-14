@@ -11,4 +11,4 @@
    middleware to make correct JSON response content type."
   (-> (handler/site routes/app-routes)
       (middleware/wrap-json-body {:keywords? true})
-       middleware/wrap-json-response))
+      middleware/wrap-json-response))

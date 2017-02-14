@@ -1,10 +1,12 @@
+
 3(ns tulip.handlers
   "This namespace contain all handling
    functions for routes responses"
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
             [ring.middleware.json :as middleware]
-            [compojure.route :as route]))
+            [compojure.route :as route]
+            [tulip.db :as db]))
 
 (def api-infos
   "Hash-map of the informations
@@ -29,3 +31,9 @@
     {:status 200
      :body {:name name
             :desc (str"Your name is " name)}}))
+
+(defn get-hive-status [id]
+  "Return to JSON the status of the selected hive"
+  {:status 200
+   :body {:id id
+          :status "on"}})
