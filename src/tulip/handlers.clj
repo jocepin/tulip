@@ -29,11 +29,23 @@
   {:status 200
    :body{:desc "This endpoint retrieve hive information through http POST method"
          :date (.toString(java.util.Date.))
-         :parameters{:name "The hive name, must be a string"
+         :parameters{:hive "The hive name, must be a string"
                      :date "The date. Will be provided by the API but optional"
                      :values{:temperature "An integer to represent actual hive temperature"
                              :weight "An unsigned integer to represent the total hive weight"
                              :humidity "An integer to represent the actual humidity, in %"}}}})
+
+(defn hive-input [hive temperature weight humidity]
+  "Retrieve parameters from hive request and parse
+   data through the database."
+    {:status 200
+     :body{:hive hive
+           :status "ok"
+           :values{:temperature temperature
+                   :weight weight
+                   :humidity humidity}
+           :date (.toString(java.util.Date.))}})
+
 ;; Hive related functions
 (def hive-infos
   "Informations about the /hive route"

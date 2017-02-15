@@ -8,10 +8,23 @@
 
 (defroutes app-routes
   "API routes declared by compojure's macro"
-  (GET "/" [] res/api-infos)
+  (ANY "/" [] res/api-infos)
   ;; Hive post endpoint
   (GET "/endpoint" [] res/endpoint-info)
-  (POST "/endpoint" [] {:body {:foo "bar"}})
+  (POST "/endpoint" request
+        (let [hive (or (get-in request [:params :hive])
+                       (get-in request [:body :hive])
+                       nil)
+              temperature (or (get-in request [:params :temp])
+                              (get-in request [:body :temp])
+                              nil)
+              weight (or (get-in request [:params :weight])
+                         (get-in request [:body :weight])
+                         nil)
+              humidity (or (get-in request [:params :humidity])
+                           (get-in request [:body :humidity])
+                           nil)]
+          (res/hive-input hive temperature weight humidity)))
   ;; Hive related Routes
   (GET "/hive" [] res/hive-infos)
   (GET "/hive/:id" [id] (res/get-hive-status id id))
