@@ -1,11 +1,12 @@
-
-3(ns tulip.handlers
+(ns tulip.handlers
   "This namespace contain all handling
    functions for routes responses"
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
             [ring.middleware.json :as middleware]
             [compojure.route :as route]
+            [monger.collection :as mc]
+            [monger.core :as mg]
             [tulip.db :as db]))
 
 (def api-infos
@@ -20,20 +21,50 @@
                         :email "iomonad@riseup.net"}
                :license{:name "Eclipse Public License"
                         :url "http://www.apache.org/licenses/LICENSE-2.0.html"}
-               :version (System/getProperty "tulip.version")}}})  
-
-(defn extract [request]
-  "Take in paramater full post parameters and extract thems
-   to parse users input"
-  (let [name (or (get-in request [:params :name])
-                 (get-in request [:body :name])
-                 "John Doe")]
-    {:status 200
-     :body {:name name
-            :desc (str"Your name is " name)}}))
-
+               :version (System/getProperty "tulip.version")
+               :date (.toString (java.util.Date.))}}})  
+;; Hive Post Endpoint
+(def endpoint-info
+  "Informations about the endpoint"
+  {:status 200
+   :body{:desc "This endpoint retrieve hive information through http POST method"
+         :date (.toString(java.util.Date.))
+         :parameters{:name "The hive name, must be a string"
+                     :date "The date. Will be provided by the API but optional"
+                     :values{:temperature "An integer to represent actual hive temperature"
+                             :weight "An unsigned integer to represent the total hive weight"
+                             :humidity "An integer to represent the actual humidity, in %"}}}})
+;; Hive related functions
+(def hive-infos
+  "Informations about the /hive route"
+  {:status 200
+   :body {:desc "This route make easier to retrieve values from database."
+          :available{:weight{:route "/hive/:id/weight"
+                             :desc "Return 10 last weight values."}
+                     :temperature{:route "/hive/:id/temperature"
+                                  :desc "Return 10 last temperature values."}
+                     :humidity{:route "/hive/:id/humidity"
+                               :desc "Return 10 last humidity values"}}}})
 (defn get-hive-status [id]
   "Return to JSON the status of the selected hive"
   {:status 200
    :body {:id id
-          :status "on"}})
+          :status "Get the status of the hive"}})
+
+(defn get-hive-temperature [id]
+  "Return 10 last temperature values recorded in the database"
+  {:status 200
+   :body {:id id
+          :desc "Get the 10 last temperature values"}})
+
+(defn get-hive-weight [id]
+  "Return 10 last weight values recorded in the database"
+  {:status 200
+   :body {:id id
+          :desc "Get the 10 last weight values"}})
+
+(defn get-hive-humidity [id]
+  "Return 10 last humidity values recorded in the database"
+  {:status 200
+   :body {:id id
+          :desc "Get the 10 last humidity values"}})

@@ -9,8 +9,16 @@
 (defroutes app-routes
   "API routes declared by compojure's macro"
   (GET "/" [] res/api-infos)
-  (GET "/hive/:id/status" [id] (res/get-hive-status id))
-  (POST "/testing" request (res/extract request))
+  ;; Hive post endpoint
+  (GET "/endpoint" [] res/endpoint-info)
+  (POST "/endpoint" [] {:body {:foo "bar"}})
+  ;; Hive related Routes
+  (GET "/hive" [] res/hive-infos)
+  (GET "/hive/:id" [id] (res/get-hive-status id id))
+  (GET "/hive/:id/temperature" [id] (res/get-hive-temperature id))
+  (GET "/hive/:id/weight" [id] (res/get-hive-weight id))
+  (GET "/hive/:id/humidity" [id] (res/get-hive-humidity id))
+  ;; Compojure related routes
   (route/resources "/")
   (route/not-found {:status 404
                     :body{:error "Not found"}}))

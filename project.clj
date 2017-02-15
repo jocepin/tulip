@@ -1,4 +1,4 @@
-(defproject tulip "0.1.0-ALPHA"
+(defproject tulip "0.1.3-ALPHA"
   :description "Flexible API to receive information from hive instances."
   :url "https://github.com/domobee/tulip"
   :license {:name "Eclipse Public License"
