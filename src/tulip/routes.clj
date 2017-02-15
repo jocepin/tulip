@@ -15,7 +15,7 @@
         (let [hive (or (get-in request [:params :hive])
                        (get-in request [:body :hive])
                        nil)
-              temperature (or (get-in request [:params :temp])
+              temp (or (get-in request [:params :temp])
                               (get-in request [:body :temp])
                               nil)
               weight (or (get-in request [:params :weight])
@@ -24,7 +24,7 @@
               humidity (or (get-in request [:params :humidity])
                            (get-in request [:body :humidity])
                            nil)]
-          (res/hive-input hive temperature weight humidity)))
+          (res/hive-input hive temp weight humidity)))
   ;; Hive related Routes
   (GET "/hive" [] res/hive-infos)
   (GET "/hive/:id" [id] (res/get-hive-status id id))
@@ -33,5 +33,4 @@
   (GET "/hive/:id/humidity" [id] (res/get-hive-humidity id))
   ;; Compojure related routes
   (route/resources "/")
-  (route/not-found {:status 404
-                    :body{:error "Not found"}}))
+  (route/not-found res/notfound-body))

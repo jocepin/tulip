@@ -9,6 +9,11 @@
             [monger.core :as mg]
             [tulip.db :as db]))
 
+(def notfound-body
+  "Default body for unsatisfated request"
+  {:status 404
+   :body{:error "Route not found"}})
+
 (def api-infos
   "Hash-map of the informations
    of the API, displayed when GET root."
@@ -22,7 +27,8 @@
                :license{:name "Eclipse Public License"
                         :url "http://www.apache.org/licenses/LICENSE-2.0.html"}
                :version (System/getProperty "tulip.version")
-               :date (.toString (java.util.Date.))}}})  
+               :date (.toString (java.util.Date.))}}})
+
 ;; Hive Post Endpoint
 (def endpoint-info
   "Informations about the endpoint"
@@ -35,16 +41,22 @@
                              :weight "An unsigned integer to represent the total hive weight"
                              :humidity "An integer to represent the actual humidity, in %"}}}})
 
-(defn hive-input [hive temperature weight humidity]
+(defn hive-input [hive temp weight humidity]
   "Retrieve parameters from hive request and parse
    data through the database."
+  (when-not (and (nil? hive)
+                 (nil? temp)
+                 (nil? weight)
+                 (nil? humidity))
+    {:status 400
+     :body{:error "Malformed request"}})
     {:status 200
-     :body{:hive hive
-           :status "ok"
-           :values{:temperature temperature
-                   :weight weight
-                   :humidity humidity}
-           :date (.toString(java.util.Date.))}})
+      :body{:hive hive
+            :status "ok"
+            :values{:temperature temp
+                    :weight weight
+                    :humidity humidity}
+            :date (.toString(java.util.Date.))}})
 
 ;; Hive related functions
 (def hive-infos
