@@ -12,7 +12,7 @@
 (defn hive-insert-schema [hive temp weight humidity]
   "Insert hive's post values in the database"
   (let [date  (.toString (java.util.Date.))]
-    (mc/insert db "hive" {:instance hive
+    (mc/insert *db* "hive" {:instance hive
                            :date date
                            :values{:temperature temp
                                    :weight weight
