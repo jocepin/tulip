@@ -6,8 +6,8 @@
 
 ;; Connect to localhost with defaut port
 ;; Create an instance of the database
-(def *conn* (mg/connect))
-(def *db* (mg/get-db *conn* "hives"))
+(def ^:dynamic *conn* (mg/connect{:host "193.239.248.170"}))
+(def ^:dynamic *db* (mg/get-db *conn* "hives"))
 
 (defn hive-insert-schema [hive temp weight humidity]
   "Insert hive's post values in the database"
