@@ -27,7 +27,7 @@
           (res/hive-input hive temp weight humidity)))
   ;; Hive related Routes
   (GET "/hive" [] res/hive-infos)
-  (GET "/hive/:id" [id] (res/get-hive-status id id))
+  (GET "/hive/:id" [id] (res/get-last-values id))
   (GET "/hive/:id/temperature" [id] (res/get-hive-temperature id))
   (GET "/hive/:id/weight" [id] (res/get-hive-weight id))
   (GET "/hive/:id/humidity" [id] (res/get-hive-humidity id))

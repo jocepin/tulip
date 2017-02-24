@@ -17,3 +17,6 @@
                            :values{:temperature temp
                                    :weight weight
                                    :humidity humidity}})))
+(defn hive-last-values [hive]
+  "Sort last values from hive instance"
+  (mc/find *db* "hive" {:instance hive}))

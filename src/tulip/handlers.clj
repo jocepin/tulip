@@ -71,6 +71,12 @@
                                   :desc "Return 10 last temperature values."}
                      :humidity{:route "/hive/:id/humidity"
                                :desc "Return 10 last humidity values"}}}})
+
+(defn get-last-values [hive]
+  "Sort last records in the database"
+  {:status 200
+   :body (db/hive-last-values hive)})
+
 (defn get-hive-status [id]
   "Return to JSON the status of the selected hive"
   {:status 200
